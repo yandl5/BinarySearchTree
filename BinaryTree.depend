@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1556731176 source:c:\users\yan\documents\edb2\binarysearchtree\binarytree\node.cpp
+	"node.h"
+
+1556731177 c:\users\yan\documents\edb2\binarysearchtree\binarytree\node.h
+	<iostream>
+
