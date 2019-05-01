@@ -1,5 +1,6 @@
 #ifndef BINARYTREE
 #define BINARYTREE
+#include "node.h"
 class BinarySearchTree
 {
 private:
