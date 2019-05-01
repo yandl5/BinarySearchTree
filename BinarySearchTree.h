@@ -16,7 +16,7 @@ public:
     int getQuantidadeElementos();
     //inserção e remoção
     void insertTree(int valor);
-
+    void removeTree(int valor);
 };
 
 #endif // BINARYTREE

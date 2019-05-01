@@ -8,6 +8,7 @@ int main()
     a->insertTree(28);
     a->insertTree(7);
     a->insertTree(45);
+    a->insertTree(45);
     cout<<a->getRoot()->getValor()<<endl;
     cout<<a->getRoot()->getRight()->getValor()<<endl;
     cout<<a->getRoot()->getLeft()->getValor()<<endl;
