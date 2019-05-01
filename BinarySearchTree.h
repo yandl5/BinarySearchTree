@@ -9,10 +9,13 @@ private:
 
 public:
     BinarySearchTree();
+    //métodos gets e sets
     void setRoot(Node* node);
     void setQuantidadeElementos(int quantidade);
     Node* getRoot();
     int getQuantidadeElementos();
+    //inserção e remoção
+    void insertTree(int valor);
 
 };
 
