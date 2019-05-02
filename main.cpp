@@ -4,14 +4,16 @@
 int main()
 {
     BinarySearchTree *a = new BinarySearchTree();
-    a->insertTree(15);
-    a->insertTree(28);
-    a->insertTree(7);
-    a->insertTree(45);
-    a->insertTree(45);
-    cout<<a->getRoot()->getValor()<<endl;
-    cout<<a->getRoot()->getRight()->getValor()<<endl;
-    cout<<a->getRoot()->getLeft()->getValor()<<endl;
-    cout<<a->getRoot()->getRight()->getRight()->getValor()<<endl;
+    a->insertTree(50);
+    a->insertTree(59);
+    a->insertTree(56);
+    a->insertTree(67);
+    a->insertTree(66);
+    a->insertTree(75);
+    a->removeTree(67);
+    Node* aux = new Node();
+    aux = a->getRoot();
+    cout<<a->getRoot()->getValor()<<endl<<a->getRoot()->getRight()->getValor()<<endl<<a->getRoot()->getRight()->getRight()->getValor()<<endl;
+    cout<<a->getQuantidadeElementos()<<endl;
     return 0;
 }

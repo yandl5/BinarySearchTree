@@ -1,20 +1,14 @@
 #include "node.h"
 Node::Node()
 {
-    this->setFather(NULL);
     this->setRight(NULL);
     this->setLeft(NULL);
 }
 Node::Node(int valor)
 {
     this->valor = valor;
-    this->setFather(NULL);
     this->setRight(NULL);
     this->setLeft(NULL);
-}
-Node* Node::getFather()
-{
-    return this->father;
 }
 Node* Node::getRight()
 {
@@ -31,10 +25,6 @@ int Node::getAltura()
 int Node::getValor()
 {
     return this->valor;
-}
-void Node::setFather(Node* node)
-{
-    this->father = node;
 }
 void Node::setLeft(Node* node)
 {

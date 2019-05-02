@@ -16,3 +16,21 @@
 	"node.h"
 	"BinarySearchTree.h"
 
+1556817460 source:/home/yancarlos05/Documentos/BinarySearchTree/main.cpp
+	<iostream>
+	"node.h"
+	"BinarySearchTree.h"
+
+1556812822 /home/yancarlos05/Documentos/BinarySearchTree/node.h
+	<iostream>
+
+1556812933 /home/yancarlos05/Documentos/BinarySearchTree/BinarySearchTree.h
+	"node.h"
+
+1556812838 source:/home/yancarlos05/Documentos/BinarySearchTree/node.cpp
+	"node.h"
+
+1556818150 source:/home/yancarlos05/Documentos/BinarySearchTree/BinarySearchTree.cpp
+	"BinarySearchTree.h"
+	<vector>
+

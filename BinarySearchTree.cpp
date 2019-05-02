@@ -1,4 +1,5 @@
 #include "BinarySearchTree.h"
+#include <vector>
 //construtor
 BinarySearchTree::BinarySearchTree()
 {
@@ -53,61 +54,126 @@ void BinarySearchTree::insertTree(int valor)
         else if(valor < auxiliar->getValor() && auxiliar->getLeft() == NULL)
         {
             auxiliar->setLeft(inserir);
-            auxiliar->getLeft()->setFather(auxiliar);
             this->quantidadeElementos++;
             return;
         }
         else if(valor > auxiliar->getValor() && auxiliar->getRight() == NULL)
         {
             auxiliar->setRight(inserir);
-            auxiliar->getRight()->setFather(auxiliar);
             this->quantidadeElementos++;
             return;
         }
     }
+}
     //remoção
-    void BinarySearchTree::removeTree(int valor)
+void BinarySearchTree::removeTree(int valor)
+{
+    if(this->quantidadeElementos==0)
     {
-        if(this->quantidadeElementos==0)
+        cout<<"Nao ha elementos para remorcao"<<endl;
+        return;
+    }
+    if(this->quantidadeElementos==1 && root->getValor()==valor)
+    {
+        this->root = NULL;
+        this->quantidadeElementos--;
+        return;
+    }
+    Node* auxiliar = new Node();
+    Node* auxiliarB = new Node();
+    auxiliar = this->root;
+    int i=0;
+    int j=0;
+    vector<Node*> aux;
+    vector<Node*> auxB;
+    while(auxiliar!= NULL)
+    {
+        aux.push_back(auxiliar);
+        //caso não haja filhos
+        if((auxiliar->getValor()==valor) && (auxiliar->getRight()==NULL) && (auxiliar->getLeft()==NULL))
         {
-            cout<<"Nao ha elementos para remorcao"<<endl;
-            return;
+            if(aux[i-1]->getRight()==auxiliar)
+            {
+                aux[i-1]->setRight(NULL);
+                this->quantidadeElementos--;
+                return;
+            }
+            else
+            {
+                aux[i-1]->setLeft(NULL);
+                this->quantidadeElementos--;
+                return;
+            }
         }
-        if(this->quantidadeElementos==1 && root->getValor()==valor)
+        //caso haja filhos apenas um filho
+        if((auxiliar->getValor()==valor) && (auxiliar->getLeft()==NULL) || (auxiliar->getRight()==NULL))
         {
-            this->root = NULL;
+            if(auxiliar->getLeft()==NULL)
+            {
+                aux[i-1]->setRight(auxiliar->getRight());
+                this->quantidadeElementos--;
+                return;
+            }
+            else if(auxiliar->getRight()==NULL)
+            {
+                aux[i-1]->setLeft(auxiliar->getLeft());
+                this->quantidadeElementos--;
+                return;
+            }
+        }
+        //caso haja filhos pela direita e esquerda
+        if((auxiliar->getValor()==valor) && (auxiliar->getLeft()!=NULL) && (auxiliar->getRight()!=NULL))
+        {
+            //vamos pegar o nó minimo da cadeia
+            auxiliarB = auxiliar->getRight();
+            auxB.push_back(auxiliarB);
+            while(auxiliarB!=NULL)
+            {
+                auxiliarB = auxiliarB->getLeft();
+                auxB.push_back(auxiliarB);
+                j++;
+            }
+            auxiliarB = auxB[j-1];
+            if(auxB[j-1]->getRight()==NULL)
+            {
+                auxB[j-2]->setLeft(NULL);
+            }
+            else if(auxB[j-1]->getRight()!=NULL)
+            {
+                auxB[j-2]->setLeft(auxB[j-1]->getRight());
+            }
+            auxiliarB->setRight(auxiliar->getRight());
+            auxiliarB->setLeft(auxiliar->getLeft());
+            if(aux[i-1]->getRight()==auxiliar)
+            {
+                aux[i-1]->setRight(auxiliarB);
+            }
+            else
+            {
+                aux[i-1]->setLeft(auxiliarB);
+            }
             this->quantidadeElementos--;
             return;
         }
-        Node* auxiliar = new Node();
-        auxiliar = this->root;
-        Node* auxiliarFather = new Node();
-        while(auxiliar!= NULL)
+        //Atualizadores
+        if(auxiliar->getValor()>valor)
         {
-            //caso nao haja filhos a esquerda e direita
-            if(auxiliar->getValor()==valor && auxiliar->getLeft()==NULL && auxiliar->getRight()==NULL)
-            {
-                auxiliarFather = auxiliar->getFather();
-                if(auxiliarFather->getRight()==auxiliar)
-                {
-                    auxiliarFather->setRight(NULL);
-                    this->quantidadeElementos--;
-                    return;
-                }
-                else
-                {
-                    auxiliarFather->setLeft(NULL);
-                    this->quantidadeElementos--;
-                    return;
-                }
-            }
-            //Tem filhos a esquerda somente
-            else if(auxiliar->getValor()==valor && auxiliar->getLeft()!=NULL && auxiliar->getRight()==NULL)
-            {
-                auxiliarFather = auxiliar->getFather();
-                auxiliarFather->set
-            }
+            auxiliar = auxiliar->getLeft();
         }
+        else if(auxiliar->getValor()<valor)
+        {
+            auxiliar = auxiliar->getRight();
+        }
+        //só pra n loopar
+        if(j>30)
+        {
+            cout<<"Loop Error"<<endl;
+            return;
+        }
+        //iteradores
+        j++;
+        i++;
     }
-
 }
+
+
