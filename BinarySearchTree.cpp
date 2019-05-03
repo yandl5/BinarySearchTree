@@ -134,23 +134,26 @@ void BinarySearchTree::removeTree(int valor)
                 j++;
             }
             auxiliarB = auxB[j-1];
+            //Mantem a sequencia da árvore.
             if(auxB[j-1]->getRight()==NULL)
             {
-                auxB[j-2]->setLeft(NULL);
+                auxB[j-1]->setLeft(NULL);
             }
-            else if(auxB[j-1]->getRight()!=NULL)
+            else if(auxB[j-1]->getRight()!=NULL && auxB.size()>2)
             {
                 auxB[j-2]->setLeft(auxB[j-1]->getRight());
             }
-            auxiliarB->setRight(auxiliar->getRight());
-            auxiliarB->setLeft(auxiliar->getLeft());
+            //Atualiza o minimo achado
+            auxB[j-1]->setRight(auxiliar->getRight());
+            auxB[j-1]->setLeft(auxiliar->getLeft());
+            //Atualiza nó pai ao nó que vai ser removido
             if(aux[i-1]->getRight()==auxiliar)
             {
-                aux[i-1]->setRight(auxiliarB);
+                aux[i-1]->setRight(auxB[j-1]);
             }
             else
             {
-                aux[i-1]->setLeft(auxiliarB);
+                aux[i-1]->setLeft(auxB[j-1]);
             }
             this->quantidadeElementos--;
             return;
@@ -164,14 +167,7 @@ void BinarySearchTree::removeTree(int valor)
         {
             auxiliar = auxiliar->getRight();
         }
-        //só pra n loopar
-        if(j>30)
-        {
-            cout<<"Loop Error"<<endl;
-            return;
-        }
         //iteradores
-        j++;
         i++;
     }
 }
