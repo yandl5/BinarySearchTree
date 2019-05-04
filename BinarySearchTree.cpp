@@ -1,5 +1,6 @@
 #include "BinarySearchTree.h"
 #include <vector>
+#include <math.h>
 //construtor
 BinarySearchTree::BinarySearchTree()
 {
@@ -202,39 +203,46 @@ bool BinarySearchTree::ehCompleta()
 {
     if(this->quantidadeElementos==0)
     {
-        return true;
+        return false;
     }
     else
     {
-        //if(quantidadeDeElementos>=quantidadeDeElementosMinima&&quantidadeDeElementos<=quantidadeDeElementosMaxima)
-         //   return true;
-       // else
-        //{
+        int altura = this->heightTree(this->root);
+        int quantidadeMinima = pow(2,altura-1);
+        int quantidadeMaxima = pow(2,altura) -1;
+        if(this->quantidadeElementos>=quantidadeMinima&&this->quantidadeElementos<=quantidadeMaxima)
+        {
+            return true;
+        }
+        else
+        {
             return false;
-        //}
+        }
     }
 }
 bool BinarySearchTree::ehCheia()
 {
+    int altura = this->heightTree(this->root);
+    int quantidadeMaxima = pow(2,altura) -1;
     if( this-> quantidadeElementos == 0)
     {
-        return true;
+        return false;
     }
     else
     {
-        //if( quantidadeDeElementos==quantidadeDeElementosMaxima)
-        //{
-          //  return true;
-        //}
-        //else
-        //{
+        if(this->quantidadeElementos==quantidadeMaxima)
+        {
+            return true;
+        }
+        else
+        {
             return false;
-        //}
+        }
     }
 }
 void BinarySearchTree::printTree(Node* r)
 {
-    if (r!=NULL)
+    if(r!=NULL)
     {
         this->printTree(r->getLeft());
         cout<<r->getValor()<<" ";
@@ -243,6 +251,26 @@ void BinarySearchTree::printTree(Node* r)
     else
     {
         return;
+    }
+}
+int BinarySearchTree::heightTree(Node* r)
+{
+    if(r != NULL)
+    {
+        int heightLeft = heightTree(r->getLeft());
+        int heightRight = heightTree(r->getRight());
+        if (heightLeft < heightRight)
+        {
+            return heightRight + 1;
+        }
+        else
+        {
+            return heightLeft + 1;
+        }
+    }
+    else
+    {
+       return 0;
     }
 }
 

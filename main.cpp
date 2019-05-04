@@ -26,12 +26,19 @@ int main()
     a->insertTree(46);
     a->insertTree(48);
     a->insertTree(69);
-    a->removeTree(42);
-    a->removeTree(70);
-    Node* aux = new Node();
-    aux = a->getRoot();
-    cout<<a->getRoot()->getValor()<<endl;
-    a->printTree(a->getRoot());
+    cout<<endl;
 
+    BinarySearchTree *b = new BinarySearchTree();
+    b->insertTree(50);
+    b->insertTree(45);
+    b->insertTree(59);
+    b->insertTree(47);
+    b->insertTree(56);
+    b->insertTree(67);
+    b->insertTree(44);
+    bool x = b->ehCheia();
+    cout<<x<<endl;
+    x = b->ehCompleta();
+    cout<<x<<endl;
     return 0;
 }

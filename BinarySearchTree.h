@@ -22,6 +22,7 @@ public:
     bool ehCheia();
     bool ehCompleta();
     void printTree(Node* r);
+    int heightTree(Node* r);
 };
 
 #endif // BINARYTREE

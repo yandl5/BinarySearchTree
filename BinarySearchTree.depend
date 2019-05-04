@@ -34,17 +34,18 @@
 	"BinarySearchTree.h"
 	<vector>
 
-1556997857 source:c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\binarysearchtree.cpp
+1557003087 source:c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\binarysearchtree.cpp
 	"BinarySearchTree.h"
 	<vector>
+	<math.h>
 
-1556993635 c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\binarysearchtree.h
+1556998701 c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\binarysearchtree.h
 	"node.h"
 
 1556918048 c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\node.h
 	<iostream>
 
-1556996244 source:c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\main.cpp
+1557000195 source:c:\users\yan\documents\edb2\binarysearchtree\binarysearchtree\binarysearchtree\main.cpp
 	<iostream>
 	"node.h"
 	"BinarySearchTree.h"
