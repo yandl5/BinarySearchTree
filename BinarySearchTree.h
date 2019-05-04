@@ -21,6 +21,7 @@ public:
     int mediana();
     bool ehCheia();
     bool ehCompleta();
+    int enesimoElemento(int n);
     void printTree(Node* r);
     int heightTree(Node* r);
 };

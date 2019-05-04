@@ -40,5 +40,7 @@ int main()
     cout<<x<<endl;
     x = b->ehCompleta();
     cout<<x<<endl;
+    string c = b->toString();
+    cout<<c<<endl;
     return 0;
 }

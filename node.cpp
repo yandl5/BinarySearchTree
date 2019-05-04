@@ -18,10 +18,6 @@ Node* Node::getLeft()
 {
     return this->left;
 }
-int Node::getAltura()
-{
-    return this->altura;
-}
 int Node::getValor()
 {
     return this->valor;
@@ -33,10 +29,6 @@ void Node::setLeft(Node* node)
 void Node::setRight(Node* node)
 {
     this->right = node;
-}
-void Node::setAltura(int altura)
-{
-    this->altura = altura;
 }
 void Node::setValor(int valor)
 {

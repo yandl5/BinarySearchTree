@@ -1,6 +1,7 @@
 #include "BinarySearchTree.h"
 #include <vector>
 #include <math.h>
+#include <queue>
 //construtor
 BinarySearchTree::BinarySearchTree()
 {
@@ -187,7 +188,26 @@ void BinarySearchTree::removeTree(int valor)
 }
 string BinarySearchTree::toString()
 {
-
+    string porNivel;
+    queue<Node*> Queue;
+    Node* aux = new Node();
+    Queue.push(this->root);
+    while( !Queue.empty() )
+    {
+        aux = Queue.front();
+        Queue.pop();
+        porNivel = porNivel + to_string(aux->getValor());
+        if(aux->getLeft() != NULL)
+        {
+            Queue.push(aux->getLeft());
+        }
+        if(aux->getRight() != NULL)
+        {
+            Queue.push(aux->getRight());
+        }
+        porNivel = porNivel + "  ";
+    }
+    return porNivel;
 }
 int BinarySearchTree::mediana()
 {
