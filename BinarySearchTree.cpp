@@ -90,7 +90,7 @@ void BinarySearchTree::removeTree(int valor)
     {
         aux.push_back(auxiliar);
         //caso não haja filhos
-        if((auxiliar->getValor()==valor) && (auxiliar->getRight()==NULL) && (auxiliar->getLeft()==NULL))
+        if(auxiliar->getValor()==valor && auxiliar->getRight()==NULL && auxiliar->getLeft()==NULL)
         {
             if(aux[i-1]->getRight()==auxiliar)
             {
@@ -106,7 +106,7 @@ void BinarySearchTree::removeTree(int valor)
             }
         }
         //caso haja filhos apenas um filho
-        if((auxiliar->getValor()==valor) && (auxiliar->getLeft()==NULL) || (auxiliar->getRight()==NULL))
+        if((auxiliar->getValor()==valor) && (auxiliar->getLeft()==NULL || auxiliar->getRight()==NULL))
         {
             if(auxiliar->getLeft()==NULL)
             {
@@ -135,26 +135,39 @@ void BinarySearchTree::removeTree(int valor)
             }
             auxiliarB = auxB[j-1];
             //Mantem a sequencia da árvore.
-            if(auxB[j-1]->getRight()==NULL)
+            if(auxB[j-1]->getRight()==NULL && auxB.size()>2)
             {
-                auxB[j-1]->setLeft(NULL);
+                auxB[j-2]->setLeft(NULL);
             }
             else if(auxB[j-1]->getRight()!=NULL && auxB.size()>2)
             {
                 auxB[j-2]->setLeft(auxB[j-1]->getRight());
             }
+            //caso que o nó é terminal
+            else
+            {
+                auxiliar->setRight(NULL);
+            }
             //Atualiza o minimo achado
             auxB[j-1]->setRight(auxiliar->getRight());
             auxB[j-1]->setLeft(auxiliar->getLeft());
             //Atualiza nó pai ao nó que vai ser removido
-            if(aux[i-1]->getRight()==auxiliar)
+            if(i==0)
             {
-                aux[i-1]->setRight(auxB[j-1]);
+                this->setRoot(auxB[j-1]);
             }
             else
             {
-                aux[i-1]->setLeft(auxB[j-1]);
+                if(aux[i-1]->getRight()==auxiliar)
+                {
+                    aux[i-1]->setRight(auxB[j-1]);
+                }
+                else if(aux[i-1]->getLeft()==auxiliar)
+                {
+                    aux[i-1]->setLeft(auxB[j-1]);
+                }
             }
+            cout<<auxB.size()<<endl;
             this->quantidadeElementos--;
             return;
         }
@@ -169,6 +182,67 @@ void BinarySearchTree::removeTree(int valor)
         }
         //iteradores
         i++;
+    }
+}
+string BinarySearchTree::toString()
+{
+
+}
+int BinarySearchTree::mediana()
+{
+    int mediana;
+    if(quantidadeElementos==0)
+    {
+        cout<<"Não há mediana, pois não existe elementos válidos da árvore"<<endl;
+        return 0;
+    }
+
+}
+bool BinarySearchTree::ehCompleta()
+{
+    if(this->quantidadeElementos==0)
+    {
+        return true;
+    }
+    else
+    {
+        //if(quantidadeDeElementos>=quantidadeDeElementosMinima&&quantidadeDeElementos<=quantidadeDeElementosMaxima)
+         //   return true;
+       // else
+        //{
+            return false;
+        //}
+    }
+}
+bool BinarySearchTree::ehCheia()
+{
+    if( this-> quantidadeElementos == 0)
+    {
+        return true;
+    }
+    else
+    {
+        //if( quantidadeDeElementos==quantidadeDeElementosMaxima)
+        //{
+          //  return true;
+        //}
+        //else
+        //{
+            return false;
+        //}
+    }
+}
+void BinarySearchTree::printTree(Node* r)
+{
+    if (r!=NULL)
+    {
+        this->printTree(r->getLeft());
+        cout<<r->getValor()<<" ";
+        this->printTree(r->getRight());
+    }
+    else
+    {
+        return;
     }
 }
 

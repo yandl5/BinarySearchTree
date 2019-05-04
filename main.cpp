@@ -18,18 +18,20 @@ int main()
     a->insertTree(78);
     a->insertTree(80);
     a->insertTree(70);
-    a->removeTree(71);
+    a->insertTree(71);
     a->insertTree(45);
+    a->insertTree(42);
     a->insertTree(41);
     a->insertTree(43);
     a->insertTree(46);
     a->insertTree(48);
-    a->removeTree(67);
-    a->removeTree(47);
+    a->insertTree(69);
+    a->removeTree(42);
+    a->removeTree(70);
     Node* aux = new Node();
     aux = a->getRoot();
-    cout<<a->getRoot()->getValor()<<endl<<a->getRoot()->getRight()->getValor()<<endl<<a->getRoot()->getRight()->getRight()->getValor()<<endl;
-    cout<<a->getRoot()->getLeft()->getRight()->getValor()<<endl;
-    cout<<a->getQuantidadeElementos()<<endl;
+    cout<<a->getRoot()->getValor()<<endl;
+    a->printTree(a->getRoot());
+
     return 0;
 }

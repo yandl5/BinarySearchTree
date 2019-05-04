@@ -17,6 +17,11 @@ public:
     //inserção e remoção
     void insertTree(int valor);
     void removeTree(int valor);
+    string toString();
+    int mediana();
+    bool ehCheia();
+    bool ehCompleta();
+    void printTree(Node* r);
 };
 
 #endif // BINARYTREE
