@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
             return -1;
         }
         	//Ler os valores para inserir na árvore
-        	int valorInt;
 	        while (! cin.eof()) {
 	        	cin >> valor;
 	        	arvore.insertTree(valor);
