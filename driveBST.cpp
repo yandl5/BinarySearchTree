@@ -6,7 +6,9 @@
 #include "BinarySearchTree.h"
 #include <string>
 #include <fstream>
-#include <stdio>
+#include <iostream>
+using namespace std;
+
 /**
  * @brief Função principal do projeto
  * @param argc Quantidade de argumentos passados via linha de comando
@@ -20,46 +22,40 @@ int main(int argc, char *argv[])
     int inicio;
     BinarySearchTree arvore;
 
-    string nomeArquivoEntrada = argv[1];
-    string nomeArquivoComandos = argv[2];
+    string nomearquivo = argv[1];
+    
 
-    ifstream arquivoEntrada;
-    ifstream arquivoComandos;
+    ifstream arquivo;
+ 
 
     string comando;
-
     string comandoPrincipal;
 
-    if (nomeArquivoEntrada != "Entrada" || nomeArquivoComandos != "Comandos") {
-        cout << "Erro ao ler os arquivos de entrada. Algum dos dois não foi encontrado. Os mesmos precisam ter como nome 'Entrada'e 'Comandos'!" << endl;
-    } else {
-        arquivoEntrada.open (nomeArquivoEntrada, fstream::in);
 
-        if (!( arquivoEntrada.is_open() ) {
+    if (nomearquivo != "Comandos") {
+        cout << "Falha carregar o arquivo de entrada!" << endl;
+		cout << "Para executar, digite o seguinte comando no terminal após a compilação:" << endl;
+		cout << "\t./nomedoarquivoexecutavel Comandos < EntradaDaABB" << endl;
+    } else {
+        arquivo.open (nomearquivo, fstream::in);
+
+        if (!( arquivo.is_open() ) ) {
             cerr << "Falha ao abrir o arquivo de entrada!" << endl;
             return -1;
         }
+        	//Ler os valores para inserir na árvore
+        	int valorInt;
+	        while (! cin.eof()) {
+	        	cin >> valor;
+	        	arvore.insertTree(valor);
+	        }
 
-        //Ler os valores para inserir na árvore
-        while (! cin.eof() ) {
-            cin >> valor;
-            arvore.insertTree(valor);
-        }
 
-        arquivoEntrada.close();
-
-        arquivoComandos.open(nomeArquivoComandos, fstream::in);
-
-        if (! ( arquivoComandos.is_open() ) ) {
-        	cerr << "Falha ao abrir o arquivo de Comandos!" << endl;
-            return -1;
-        }
-
-        while (!arquivoComandos.eof() ) {
-            getline (arquivoComandos, comando);
+        while (!arquivo.eof() ) {
+            getline (arquivo, comando);
 
             if (comando.size() < 5) {
-                cout << "Comando não reconhecido!" << endl;
+                cout << endl;
             } else if (comando == "MEDIANA") {
                 cout << "Comando MEDIANA reconhecido!"  << endl;
                 cout << "A mediana da árvore é: " << arvore.mediana() << endl;
@@ -104,7 +100,7 @@ int main(int argc, char *argv[])
             }
         }
         cout << endl;
-        arquivoComandos.close();
+        arquivo.close();
     }
 
     return 0;
