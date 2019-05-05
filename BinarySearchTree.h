@@ -21,9 +21,12 @@ public:
     int mediana();
     bool ehCheia();
     bool ehCompleta();
+    //int posicao(int x);
     int enesimoElemento(int n);
-    void printTree(Node* r);
+    //Função auxiliares
     int heightTree(Node* r);
+    void printTree(Node* r);
+    int auxEnesimoElemento(int n,Node* aux,int left);
 };
 
 #endif // BINARYTREE

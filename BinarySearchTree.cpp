@@ -29,6 +29,9 @@ int BinarySearchTree::getQuantidadeElementos()
 //inserção
 void BinarySearchTree::insertTree(int valor)
 {
+    vector<char> mapaCaminho;
+    vector<Node*> caminho;
+    int i=0;
     Node* inserir = new Node(valor);
     if(this->root==NULL)
     {
@@ -42,32 +45,53 @@ void BinarySearchTree::insertTree(int valor)
     {
         if(valor == auxiliar->getValor())
         {
+            while(i>0)
+            {
+                if(mapaCaminho[i-1]='r')
+                {
+                    caminho[i-1]->setNodesRight(caminho[i-1]->getNodesRight()-1);
+                }
+                else if(mapaCaminho[i-1]=='l')
+                {
+                    caminho[i-1]->setNodesLeft(caminho[i-1]->getNodesLeft()-1);
+                }
+                i--;
+            }
             cout<<"Valor que vc deseja inserir, ja existe na arvore"<<endl;
             return;
         }
         else if(valor <= auxiliar->getValor() && auxiliar->getLeft() != NULL)
         {
+            mapaCaminho.push_back('l');
+            caminho.push_back(auxiliar);
+            auxiliar->setNodesLeft(auxiliar->getNodesLeft()+1);
             auxiliar = auxiliar->getLeft();
         }
         else if(valor >= auxiliar->getValor() && auxiliar->getRight() != NULL)
         {
+            mapaCaminho.push_back('r');
+            caminho.push_back(auxiliar);
+            auxiliar->setNodesRight(auxiliar->getNodesRight()+1);
             auxiliar = auxiliar->getRight();
         }
         else if(valor < auxiliar->getValor() && auxiliar->getLeft() == NULL)
         {
             auxiliar->setLeft(inserir);
+            auxiliar->setNodesLeft(auxiliar->getNodesLeft()+1);
             this->quantidadeElementos++;
             return;
         }
         else if(valor > auxiliar->getValor() && auxiliar->getRight() == NULL)
         {
             auxiliar->setRight(inserir);
+            auxiliar->setNodesRight(auxiliar->getNodesRight()+1);
             this->quantidadeElementos++;
             return;
         }
+        i++;
     }
 }
-    //remoção
+//remoção
 void BinarySearchTree::removeTree(int valor)
 {
     if(this->quantidadeElementos==0)
@@ -88,6 +112,7 @@ void BinarySearchTree::removeTree(int valor)
     int j=0;
     vector<Node*> aux;
     vector<Node*> auxB;
+    vector<char> mapaPercurso;
     while(auxiliar!= NULL)
     {
         aux.push_back(auxiliar);
@@ -112,12 +137,24 @@ void BinarySearchTree::removeTree(int valor)
         {
             if(auxiliar->getLeft()==NULL)
             {
+                if(auxiliar==root)
+                {
+                    this->root=auxiliar->getRight();
+                    this->quantidadeElementos--;
+                    return;
+                }
                 aux[i-1]->setRight(auxiliar->getRight());
                 this->quantidadeElementos--;
                 return;
             }
             else if(auxiliar->getRight()==NULL)
             {
+                if(auxiliar==root)
+                {
+                    this->root=auxiliar->getLeft();
+                    this->quantidadeElementos--;
+                    return;
+                }
                 aux[i-1]->setLeft(auxiliar->getLeft());
                 this->quantidadeElementos--;
                 return;
@@ -127,35 +164,57 @@ void BinarySearchTree::removeTree(int valor)
         if((auxiliar->getValor()==valor) && (auxiliar->getLeft()!=NULL) && (auxiliar->getRight()!=NULL))
         {
             //vamos pegar o nó minimo da cadeia
+
             auxiliarB = auxiliar->getRight();
+            if(auxiliarB->getNodesRight()>0)
+            {
+                auxiliarB->setNodesRight(auxiliarB->getNodesRight());
+            }
             auxB.push_back(auxiliarB);
             while(auxiliarB!=NULL)
             {
                 auxiliarB = auxiliarB->getLeft();
+                if(auxiliarB!=NULL)
+                {
+                    auxiliarB->setNodesLeft(auxiliar->getNodesLeft()-1);
+                }
                 auxB.push_back(auxiliarB);
                 j++;
             }
-            auxiliarB = auxB[j-1];
             //Mantem a sequencia da árvore.
             if(auxB[j-1]->getRight()==NULL && auxB.size()>2)
             {
+                auxB[j-2]->setNodesLeft(0);
                 auxB[j-2]->setLeft(NULL);
             }
             else if(auxB[j-1]->getRight()!=NULL && auxB.size()>2)
             {
+                auxB[j-2]->setNodesLeft(auxB[j-2]->getNodesRight());
                 auxB[j-2]->setLeft(auxB[j-1]->getRight());
             }
             //caso que o nó é terminal
-            else
+            if(auxB.size()<=2 && auxB[0]->getLeft()!=NULL)
             {
                 auxiliar->setRight(NULL);
             }
+            else if(auxB.size()<=2 && auxB[0]->getRight()!=NULL)
+            {
+                auxiliar->setRight(auxB[0]->getRight());
+            }
+            else if(auxB.size()<=2 && auxB[0]->getRight()==NULL)
+            {
+                auxiliar->setRight(auxB[0]->getRight());
+            }
             //Atualiza o minimo achado
             auxB[j-1]->setRight(auxiliar->getRight());
+            auxB[j-1]->setNodesRight(auxiliar->getNodesRight()-1);
             auxB[j-1]->setLeft(auxiliar->getLeft());
+            auxB[j-1]->setNodesLeft(auxiliar->getNodesLeft());
             //Atualiza nó pai ao nó que vai ser removido
             if(i==0)
             {
+                auxB[j-1]->setNodesRight(this->root->getNodesRight()-1);
+                auxB[j-1]->setNodesLeft(this->root->getNodesLeft());
                 this->setRoot(auxB[j-1]);
             }
             else
@@ -169,18 +228,37 @@ void BinarySearchTree::removeTree(int valor)
                     aux[i-1]->setLeft(auxB[j-1]);
                 }
             }
-            cout<<auxB.size()<<endl;
             this->quantidadeElementos--;
             return;
         }
         //Atualizadores
         if(auxiliar->getValor()>valor)
         {
+            auxiliar->setNodesLeft(auxiliar->getNodesLeft()-1);
+            mapaPercurso.push_back('l');
             auxiliar = auxiliar->getLeft();
         }
         else if(auxiliar->getValor()<valor)
         {
+            auxiliar->setNodesRight(auxiliar->getNodesRight()-1);
+            mapaPercurso.push_back('r');
             auxiliar = auxiliar->getRight();
+        }
+        //caso não encontre o node para remorção
+        if(auxiliar==NULL)
+        {
+            while(i>0)
+                {
+                    if(mapaPercurso[i-1]='r')
+                    {
+                        aux[i-1]->setNodesRight(aux[i-1]->getNodesRight()+1);
+                    }
+                    else if(mapaPercurso[i-1]=='l')
+                    {
+                        aux[i-1]->setNodesLeft(aux[i-1]->getNodesLeft()+1);
+                    }
+                    i--;
+                }
         }
         //iteradores
         i++;
@@ -293,5 +371,16 @@ int BinarySearchTree::heightTree(Node* r)
        return 0;
     }
 }
+int BinarySearchTree::enesimoElemento(int n)
+{
+    if(this->quantidadeElementos>0)
+    {
+       // return auxEnesimoElemento(n,this->root);
+    }
 
+}
+int BinarySearchTree::auxEnesimoElemento(int n,Node* aux,int left)
+{
+
+}
 
