@@ -26,7 +26,7 @@ public:
     //Função auxiliares
     int heightTree(Node* r);
     void printTree(Node* r);
-    int auxEnesimoElemento(int n,Node* aux,int left);
+    int auxEnesimoElemento(int n,Node* aux,int percorridos);
 };
 
 #endif // BINARYTREE

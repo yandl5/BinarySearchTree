@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="Commands" />
+				<Option parameters="Comandos &lt; EntradaDaABB" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -35,8 +35,7 @@
 		</Compiler>
 		<Unit filename="BinarySearchTree.cpp" />
 		<Unit filename="BinarySearchTree.h" />
-		<Unit filename="BinaryTree.h" />
-		<Unit filename="execMain.cpp" />
+		<Unit filename="main.cpp" />
 		<Unit filename="node.cpp" />
 		<Unit filename="node.h" />
 		<Extensions>

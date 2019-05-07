@@ -348,6 +348,7 @@ void BinarySearchTree::printTree(Node* r)
     }
     else
     {
+        cout<<endl;
         return;
     }
 }
@@ -373,14 +374,56 @@ int BinarySearchTree::heightTree(Node* r)
 }
 int BinarySearchTree::enesimoElemento(int n)
 {
-    if(this->quantidadeElementos>0)
+    if(this->quantidadeElementos<0 && n<1)
     {
-       // return auxEnesimoElemento(n,this->root);
+       return -1;
     }
-
+    else
+    {
+        return auxEnesimoElemento(n,this->root,this->root->getNodesLeft()+1);
+    }
 }
-int BinarySearchTree::auxEnesimoElemento(int n,Node* aux,int left)
+int BinarySearchTree::auxEnesimoElemento(int n,Node* aux,int percorridos)
 {
-
+    cout<<aux->getValor()<<endl;
+    cout<<aux->getNodesLeft()<<" "<<aux->getNodesRight()<<" "<<percorridos<<endl;
+    if(aux==NULL)
+    {
+        return -1;
+    }
+    else if(percorridos==n)
+    {
+        return aux->getValor();
+    }
+    else if(percorridos>=n)
+    {
+        if(aux->getLeft()!=NULL && aux!= this->root)
+        {
+            return auxEnesimoElemento(n,aux->getLeft(),percorridos-aux->getLeft()->getNodesRight()-1);
+        }
+        else if(aux->getLeft()!=NULL && aux== this->root)
+        {
+            return auxEnesimoElemento(n,aux->getLeft(),percorridos-aux->getLeft()->getNodesRight()-1);
+        }
+        else
+            return -1;
+    }
+    else if(percorridos<=n)
+    {
+        if(aux->getRight()!=NULL && aux!= this->root)
+        {
+            return auxEnesimoElemento(n,aux->getRight(),percorridos+aux->getRight()->getNodesLeft()+1);
+        }
+        else if(aux->getRight()!=NULL && aux== this->root)
+        {
+            return auxEnesimoElemento(n,aux->getRight(),percorridos+aux->getRight()->getNodesLeft()+1);
+        }
+        else return -1;
+    }
+    else
+    {
+        cout<<"sei lá"<<endl;
+        return -1;
+    }
 }
 
