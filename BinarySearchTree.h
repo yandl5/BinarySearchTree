@@ -21,9 +21,10 @@ public:
     int mediana();
     bool ehCheia();
     bool ehCompleta();
-    //int posicao(int x);
+    int posicao(int x);
     int enesimoElemento(int n);
     //Função auxiliares
+    int auxPosicao(int x, Node* aux,int posicaoX);
     int heightTree(Node* r);
     void printTree(Node* r);
     int auxEnesimoElemento(int n,Node* aux,int percorridos);

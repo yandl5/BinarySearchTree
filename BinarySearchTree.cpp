@@ -1,5 +1,6 @@
 #include "BinarySearchTree.h"
 #include <vector>
+#include "node.h"
 #include <math.h>
 #include <queue>
 //construtor
@@ -289,13 +290,83 @@ string BinarySearchTree::toString()
 }
 int BinarySearchTree::mediana()
 {
-    int mediana;
     if(quantidadeElementos==0)
     {
         cout<<"Não há mediana, pois não existe elementos válidos da árvore"<<endl;
         return 0;
     }
+    int mediana = this->quantidadeElementos/2;
+    if(this->quantidadeElementos%2==0)
+    {
+        if(this->enesimoElemento(mediana)<this->enesimoElemento(mediana+1))
+        {
+            return this->enesimoElemento(mediana);
+        }
+        else
+        {
+            return this->enesimoElemento(mediana+1);
+        }
 
+    }
+    else
+    {
+        return this->enesimoElemento(mediana);
+    }
+}
+int BinarySearchTree::posicao(int x)
+{
+    if(this->quantidadeElementos==0)
+    {
+        cout<<"Não há elementos na árvore"<<endl;
+        return -1;
+    }
+    else
+    {
+        int y;
+        y = this->auxPosicao(x,this->getRoot(),this->getRoot()->getNodesLeft()+1);
+        if(y==-1)
+        {
+            cout<<"O elemento não está inserido na lista"<<endl;
+            return -1;
+        }
+        else
+        {
+            return y;
+        }
+    }
+}
+int BinarySearchTree::auxPosicao(int x, Node* aux,int percorridos)
+{
+    if(aux==NULL)
+    {
+        return -1;
+    }
+    if(aux->getValor()==x)
+    {
+        return percorridos;
+    }
+    else if(x<=aux->getValor())
+    {
+        if(aux->getLeft()!=NULL)
+        {
+            return auxPosicao(x,aux->getLeft(),percorridos-aux->getLeft()->getNodesRight()-1);
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    else if(x>=aux->getValor())
+    {
+        if(aux->getRight()!=NULL)
+        {
+            return auxPosicao(x,aux->getRight(),percorridos+aux->getRight()->getNodesLeft()+1);
+        }
+        else
+        {
+            return -1;
+        }
+    }
 }
 bool BinarySearchTree::ehCompleta()
 {
@@ -385,8 +456,6 @@ int BinarySearchTree::enesimoElemento(int n)
 }
 int BinarySearchTree::auxEnesimoElemento(int n,Node* aux,int percorridos)
 {
-    cout<<aux->getValor()<<endl;
-    cout<<aux->getNodesLeft()<<" "<<aux->getNodesRight()<<" "<<percorridos<<endl;
     if(aux==NULL)
     {
         return -1;
@@ -397,33 +466,25 @@ int BinarySearchTree::auxEnesimoElemento(int n,Node* aux,int percorridos)
     }
     else if(percorridos>=n)
     {
-        if(aux->getLeft()!=NULL && aux!= this->root)
-        {
-            return auxEnesimoElemento(n,aux->getLeft(),percorridos-aux->getLeft()->getNodesRight()-1);
-        }
-        else if(aux->getLeft()!=NULL && aux== this->root)
+        if(aux->getLeft()!=NULL)
         {
             return auxEnesimoElemento(n,aux->getLeft(),percorridos-aux->getLeft()->getNodesRight()-1);
         }
         else
+        {
             return -1;
+        }
     }
     else if(percorridos<=n)
     {
-        if(aux->getRight()!=NULL && aux!= this->root)
+        if(aux->getRight()!=NULL)
         {
             return auxEnesimoElemento(n,aux->getRight(),percorridos+aux->getRight()->getNodesLeft()+1);
         }
-        else if(aux->getRight()!=NULL && aux== this->root)
+        else
         {
-            return auxEnesimoElemento(n,aux->getRight(),percorridos+aux->getRight()->getNodesLeft()+1);
+            return -1;
         }
-        else return -1;
-    }
-    else
-    {
-        cout<<"sei lá"<<endl;
-        return -1;
     }
 }
 

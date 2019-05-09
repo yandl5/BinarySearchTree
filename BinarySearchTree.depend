@@ -65,3 +65,38 @@
 	<fstream>
 	<iostream>
 
+1557415063 source:/home/yancarlos05/Documentos/BST/BinarySearchTree/node.cpp
+	"node.h"
+
+1557415063 /home/yancarlos05/Documentos/BST/BinarySearchTree/node.h
+	<iostream>
+
+1557415391 source:/home/yancarlos05/Documentos/BST/BinarySearchTree/main.cpp
+	<iostream>
+	"node.h"
+	"BinarySearchTree.h"
+
+1557415063 /home/yancarlos05/Documentos/BST/BinarySearchTree/BinarySearchTree.h
+	"node.h"
+
+1557439676 source:c:\users\yan\documents\edb2\pronto\binarysearchtree\binarysearchtree.cpp
+	"BinarySearchTree.h"
+	<vector>
+	"node.h"
+	<math.h>
+	<queue>
+
+1557404970 c:\users\yan\documents\edb2\pronto\binarysearchtree\binarysearchtree.h
+	"node.h"
+
+1557404972 c:\users\yan\documents\edb2\pronto\binarysearchtree\node.h
+	<iostream>
+
+1557439513 source:c:\users\yan\documents\edb2\pronto\binarysearchtree\main.cpp
+	<iostream>
+	"node.h"
+	"BinarySearchTree.h"
+
+1557404972 source:c:\users\yan\documents\edb2\pronto\binarysearchtree\node.cpp
+	"node.h"
+

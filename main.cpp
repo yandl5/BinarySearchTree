@@ -27,7 +27,6 @@ int main()
     a->insertTree(48);
     a->insertTree(69);
     a->insertTree(49);
-    a->removeTree(45);
     cout<<endl;
 
     BinarySearchTree *b = new BinarySearchTree();
@@ -43,7 +42,7 @@ int main()
     cout<<endl;
 
     aux=a->getRoot();
-    int x = a->enesimoElemento(5);
+    int x = a->enesimoElemento(16);
     cout<<x<<endl;
     return 0;
 }
