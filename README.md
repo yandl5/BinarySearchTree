@@ -20,8 +20,8 @@ O objetivo deste tipo de árvore é estruturar os dados de forma a permitir busc
 - [X]  nÉsimoTermo - Melhor caso: ***O(log n)*** | Pior caso: ***O(n)*** 
 - [X]  posição - Melhor caso: ***O(log n)*** | Pior caso: ***O(n)*** 
 - [X]  mediana - Melhor caso: ***O(log n)*** | Pior caso: ***O(n)*** 
-- [X]  ehCheia - ***O(1)***
-- [X]  ehCompleta - ***O(1)***
+- [X]  ehCheia - ***O(h)***
+- [X]  ehCompleta - ***O(h)***
 - [X]  toString - ***O(n)***
 
 [Árvore Binária]: https://pt.wikipedia.org/wiki/%C3%81rvore_bin%C3%A1ria_de_busca
